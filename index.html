@@ -87,6 +87,9 @@ header.hero { padding-top: 3.5rem; display: grid; gap: 1.75rem; }
 .service { background: var(--surface); border: 1px solid var(--line); padding: 1.5rem; display: grid; gap: .8rem; align-content: start; min-width: 0; }
 .service .ref { font: 500 .75rem/1 var(--mono); color: var(--accent); }
 .service ul { margin: 0; padding-left: 1.1rem; color: var(--muted); display: grid; gap: .3rem; }
+.service { grid-template-rows: auto auto auto 1fr auto; }
+.service .price { margin-top: .6rem; padding-top: .8rem; border-top: 1px solid var(--line); font: 400 .85rem/1.3 var(--mono); color: var(--muted); align-self: end; }
+.service .price strong { color: var(--accent); font: 700 1.25rem/1 var(--display); }
 
 /* Projet phare */
 .project { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 2.5rem; align-items: start; }
@@ -156,7 +159,7 @@ footer { color: var(--muted); font-size: .85rem; border-top: 1px solid var(--lin
   <header class="hero">
     <div class="fx" aria-label="Barre de formule"><b>fx</b><code>=<em>DÉCISION</em>(<i>vos_données</i> ; modèle ; automatisation)</code></div>
     <h1>Anael Rudy NGA</h1>
-    <p class="lede"><strong>Finance et automatisation.</strong> Je transforme vos fichiers Excel et vos données en outils de décision : modèles financiers, tableaux de bord, scripts Python qui font le travail répétitif à votre place.</p>
+    <p class="lede"><strong>Finance et automatisation pour les créateurs d'entreprise, indépendants et TPE.</strong> Je transforme vos fichiers Excel et vos données en outils de décision : modèles financiers, tableaux de bord, scripts qui font le travail répétitif à votre place.</p>
     <div class="tags">
       <span class="tag">Ingénieur généraliste · UCAC-ICAM</span>
       <span class="tag">Bachelor Finance · INSEEC Bordeaux</span>
@@ -177,6 +180,7 @@ footer { color: var(--muted); font-size: .85rem; border-top: 1px solid var(--lin
           <li>Calcul de VAN, TRI, délai de retour</li>
           <li>Scénarios et sensibilités</li>
         </ul>
+        <p class="price">à partir de <strong>90 €</strong> · livré en 5 jours</p>
       </article>
       <article class="service">
         <span class="ref">A2</span>
@@ -187,6 +191,7 @@ footer { color: var(--muted); font-size: .85rem; border-top: 1px solid var(--lin
           <li>Suivi de trésorerie et de budget</li>
           <li>Reporting mensuel automatisé</li>
         </ul>
+        <p class="price">à partir de <strong>60 €</strong> · livré en 4 jours</p>
       </article>
       <article class="service">
         <span class="ref">A3</span>
@@ -197,112 +202,14 @@ footer { color: var(--muted); font-size: .85rem; border-top: 1px solid var(--lin
           <li>Macros Excel (VBA) et scripts Python</li>
           <li>Analyse de données et graphiques</li>
         </ul>
+        <p class="price">à partir de <strong>40 €</strong> · livré en 3 jours</p>
       </article>
     </div>
-  </section>
-
-  <section aria-labelledby="projet-t">
-    <div class="col-head"><span class="cell">B</span>Projet phare</div>
-    <div class="project">
-      <div class="text">
-        <h2 id="projet-t">Un modèle de prévision mis à l'épreuve du réel</h2>
-        <p>Un système Python qui estime chaque jour les probabilités des matchs de 11 championnats européens et des coupes d'Europe, puis publie une page à jour automatiquement. Le football sert de terrain d'essai ; les méthodes sont celles de la finance quantitative : probabilités, calibration, backtest, comparaison au prix de marché.</p>
-        <div class="figures">
-          <div><strong class="num">12 500</strong><span>matchs historiques collectés et nettoyés</span></div>
-          <div><strong class="num">3 768</strong><span>matchs de test sur 12 mois, jamais vus à l'entraînement</span></div>
-          <div><strong class="num">80,9 %</strong><span>de réussite réelle pour 80,5 % annoncés</span></div>
-        </div>
-        <ol class="steps">
-          <li><strong>Collecte</strong> : résultats, tirs, buts attendus et cotes depuis trois sources, mise à jour quotidienne.</li>
-          <li><strong>Modélisation</strong> : classement Elo, régression logistique, loi de Poisson corrigée (Dixon-Coles).</li>
-          <li><strong>Évaluation</strong> : test sur 12 mois et comparaison au prix des bookmakers.</li>
-          <li><strong>Suivi</strong> : chaque prévision est enregistrée avant le match puis comparée au résultat.</li>
-        </ol>
-        <p class="note">Le constat est franc : le modèle égale le marché sans le battre. Je le dis parce qu'un modèle utile est d'abord un modèle dont on connaît les limites ; c'est la même rigueur que j'applique à un prévisionnel.</p>
-        <p><a href="https://github.com/anaelrudy-crypto/prevision-football" target="_blank" rel="noopener">Voir le code et la méthode sur GitHub →</a></p>
-        <p class="tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">scikit-learn</span><span class="tag">API web</span><span class="tag">Automatisation</span></p>
-      </div>
-      <figure class="chart" style="margin:0">
-        <h3>Ce qui est annoncé se réalise</h3>
-        <svg viewBox="0 0 320 262" role="img" aria-label="Taux de réussite réel en fonction de la probabilité annoncée, par tranche : les quatre points sont proches de la diagonale.">
-          <line class="axis" x1="50" y1="220" x2="300" y2="220"/>
-          <line class="axis" x1="50" y1="20" x2="50" y2="220"/>
-          <g>
-            <line class="axis" x1="50" y1="174.5" x2="300" y2="174.5" stroke-opacity=".5"/>
-            <line class="axis" x1="50" y1="129.1" x2="300" y2="129.1" stroke-opacity=".5"/>
-            <line class="axis" x1="50" y1="83.6" x2="300" y2="83.6" stroke-opacity=".5"/>
-            <line class="axis" x1="50" y1="38.2" x2="300" y2="38.2" stroke-opacity=".5"/>
-          </g>
-          <line class="diag" x1="50" y1="220" x2="300" y2="20"/>
-          <text x="50" y="236" text-anchor="middle">70</text>
-          <text x="106.8" y="236" text-anchor="middle">75</text>
-          <text x="163.6" y="236" text-anchor="middle">80</text>
-          <text x="220.5" y="236" text-anchor="middle">85</text>
-          <text x="277.3" y="236" text-anchor="middle">90</text>
-          <text x="42" y="223" text-anchor="end">70</text>
-          <text x="42" y="177.5" text-anchor="end">75</text>
-          <text x="42" y="132.1" text-anchor="end">80</text>
-          <text x="42" y="86.6" text-anchor="end">85</text>
-          <text x="42" y="41.2" text-anchor="end">90</text>
-          <text x="175" y="256" text-anchor="middle">probabilité annoncée (%)</text>
-          <text x="12" y="120" text-anchor="middle" transform="rotate(-90 12 120)">réussite réelle (%)</text>
-          <circle class="dot" cx="100" cy="199.1" r="5"/>
-          <circle class="dot" cx="133" cy="144.5" r="10"/>
-          <circle class="dot" cx="189.8" cy="111.8" r="7.5"/>
-          <circle class="dot" cx="252.3" cy="48.2" r="7"/>
-        </svg>
-        <p class="caption">Chaque point est une tranche de prévisions ; sa taille indique le nombre de matchs. Sur la diagonale, la réussite réelle égale exactement la probabilité annoncée.</p>
-        <div style="overflow-x:auto">
-          <table>
-            <thead><tr><th>Tranche</th><th>Matchs</th><th>Annoncé</th><th>Réel</th></tr></thead>
-            <tbody>
-              <tr><td>70-75 %</td><td>386</td><td>74,4 %</td><td>72,3 %</td></tr>
-              <tr><td>75-80 %</td><td>1 615</td><td>77,3 %</td><td>78,3 %</td></tr>
-              <tr><td>80-85 %</td><td>962</td><td>82,3 %</td><td>81,9 %</td></tr>
-              <tr><td>85-91 %</td><td>805</td><td>87,8 %</td><td>88,9 %</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </figure>
-    </div>
-  </section>
-
-  <section aria-labelledby="parcours-t">
-    <div class="col-head"><span class="cell">C</span>Parcours</div>
-    <h2 id="parcours-t">Expérience en entreprise</h2>
-    <div class="timeline">
-      <div class="job">
-        <span class="when">avr.-juil. 2025</span>
-        <div><h3>Contrôle de gestion technique <small>· ENGIE Solutions, Nantes</small></h3>
-        <p>Suivi financier de projets énergie (réseaux de chaleur, solaire industriel), modélisation ROI et VAN, tableaux de bord Power BI, reporting mensuel, analyse de risques.</p></div>
-      </div>
-      <div class="job">
-        <span class="when">avr.-juil. 2024</span>
-        <div><h3>Audit et analyse financière <small>· Mazars (aujourd'hui Forvis Mazars), Bordeaux</small></h3>
-        <p>Rapprochements bancaires, retraitement de bilans, indicateurs clés pour les clients, audits internes.</p></div>
-      </div>
-      <div class="job">
-        <span class="when">avr.-août 2023</span>
-        <div><h3>Assistant chef de projet <small>· Kiro'o Games, Paris (télétravail)</small></h3>
-        <p>Stratégie budgétaire de deux jeux vidéo, préparation d'une levée de fonds et des supports investisseurs.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section aria-labelledby="methode-t">
-    <div class="col-head"><span class="cell">D</span>Méthode</div>
-    <h2 id="methode-t">Comment se passe une mission</h2>
-    <ol class="method">
-      <li><h3>Échange</h3><p>Vous décrivez votre besoin et me montrez vos fichiers actuels.</p></li>
-      <li><h3>Devis</h3><p>Un prix fixe et un délai clairs avant de commencer.</p></li>
-      <li><h3>Livraison</h3><p>Un fichier documenté que vous savez utiliser seul.</p></li>
-      <li><h3>Ajustements</h3><p>Une série de corrections incluse après livraison.</p></li>
-    </ol>
-    <p class="soon">Vos fichiers restent confidentiels et ne sont jamais réutilisés pour un autre client.</p>
+    <p class="soon" style="font-size:.9rem">Prix de départ pour un besoin simple. Après un premier échange, vous recevez un prix fixe et un délai avant tout démarrage.</p>
   </section>
 
   <section aria-labelledby="exemples-t">
-    <div class="col-head"><span class="cell">E</span>Exemples</div>
+    <div class="col-head"><span class="cell">B</span>Exemples</div>
     <h2 id="exemples-t">Business plan d'une torréfaction de café</h2>
     <p class="soon" style="font-size:.9rem">Chaque exemple est un vrai fichier Excel, entièrement en formules, à télécharger et à tester.</p>
     <p>Un modèle Excel sur 5 ans pour un atelier de torréfaction à Bordeaux (exemple fictif). On choisit un scénario dans une liste déroulante et tout se recalcule : compte de résultat, flux de trésorerie, VAN, TRI, délai de récupération, point mort. Une page explique les hypothèses et les simplifications.</p>
@@ -368,6 +275,106 @@ footer { color: var(--muted); font-size: .85rem; border-top: 1px solid var(--lin
       </div>
       <p class="note">Le mois est bon, mais l'année est en retard sur le budget. En cliquant sur Pessac, on voit pourquoi : des travaux devant le magasin ont fait chuter les ventes de juin à septembre. Bordeaux compense en partie grâce au lancement des vélos cargo. Un reporting utile pointe la cause, pas seulement le chiffre.</p>
       <p><a class="dl" href="exemples/reporting-mensuel-velos.xlsx" download>Télécharger le reporting mensuel (Excel)</a></p>
+    </div>
+  </section>
+
+  <section aria-labelledby="methode-t">
+    <div class="col-head"><span class="cell">C</span>Méthode</div>
+    <h2 id="methode-t">Comment se passe une mission</h2>
+    <ol class="method">
+      <li><h3>Échange</h3><p>Vous décrivez votre besoin et me montrez vos fichiers actuels.</p></li>
+      <li><h3>Devis</h3><p>Un prix fixe et un délai clairs avant de commencer.</p></li>
+      <li><h3>Livraison</h3><p>Un fichier documenté que vous savez utiliser seul.</p></li>
+      <li><h3>Ajustements</h3><p>Une série de corrections incluse après livraison.</p></li>
+    </ol>
+    <p class="soon">Vos fichiers restent confidentiels et ne sont jamais réutilisés pour un autre client.</p>
+  </section>
+
+  <section aria-labelledby="projet-t">
+    <div class="col-head"><span class="cell">D</span>Projet data</div>
+    <div class="project">
+      <div class="text">
+        <h2 id="projet-t">Un modèle de prévision mis à l'épreuve du réel</h2>
+        <p>Un système Python qui estime chaque jour les probabilités des matchs de 11 championnats européens et des coupes d'Europe, puis publie une page à jour automatiquement. Le football sert de terrain d'essai ; les méthodes sont celles de la finance quantitative : probabilités, calibration, backtest, comparaison au prix de marché.</p>
+        <div class="figures">
+          <div><strong class="num">12 500</strong><span>matchs historiques collectés et nettoyés</span></div>
+          <div><strong class="num">3 768</strong><span>matchs de test sur 12 mois, jamais vus à l'entraînement</span></div>
+          <div><strong class="num">80,9 %</strong><span>de réussite réelle pour 80,5 % annoncés</span></div>
+        </div>
+        <ol class="steps">
+          <li><strong>Collecte</strong> : résultats, tirs, buts attendus et cotes depuis trois sources, mise à jour quotidienne.</li>
+          <li><strong>Modélisation</strong> : classement Elo, régression logistique, loi de Poisson corrigée (Dixon-Coles).</li>
+          <li><strong>Évaluation</strong> : test sur 12 mois et comparaison au prix des bookmakers.</li>
+          <li><strong>Suivi</strong> : chaque prévision est enregistrée avant le match puis comparée au résultat.</li>
+        </ol>
+        <p class="note">Le constat est franc : le modèle égale le marché sans le battre. Je le dis parce qu'un modèle utile est d'abord un modèle dont on connaît les limites ; c'est la même rigueur que j'applique à un prévisionnel.</p>
+        <p><a href="https://github.com/anaelrudy-crypto/prevision-football" target="_blank" rel="noopener">Voir le code et la méthode sur GitHub →</a></p>
+        <p class="tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">scikit-learn</span><span class="tag">API web</span><span class="tag">Automatisation</span></p>
+      </div>
+      <figure class="chart" style="margin:0">
+        <h3>Ce qui est annoncé se réalise</h3>
+        <svg viewBox="0 0 320 262" role="img" aria-label="Taux de réussite réel en fonction de la probabilité annoncée, par tranche : les quatre points sont proches de la diagonale.">
+          <line class="axis" x1="50" y1="220" x2="300" y2="220"/>
+          <line class="axis" x1="50" y1="20" x2="50" y2="220"/>
+          <g>
+            <line class="axis" x1="50" y1="174.5" x2="300" y2="174.5" stroke-opacity=".5"/>
+            <line class="axis" x1="50" y1="129.1" x2="300" y2="129.1" stroke-opacity=".5"/>
+            <line class="axis" x1="50" y1="83.6" x2="300" y2="83.6" stroke-opacity=".5"/>
+            <line class="axis" x1="50" y1="38.2" x2="300" y2="38.2" stroke-opacity=".5"/>
+          </g>
+          <line class="diag" x1="50" y1="220" x2="300" y2="20"/>
+          <text x="50" y="236" text-anchor="middle">70</text>
+          <text x="106.8" y="236" text-anchor="middle">75</text>
+          <text x="163.6" y="236" text-anchor="middle">80</text>
+          <text x="220.5" y="236" text-anchor="middle">85</text>
+          <text x="277.3" y="236" text-anchor="middle">90</text>
+          <text x="42" y="223" text-anchor="end">70</text>
+          <text x="42" y="177.5" text-anchor="end">75</text>
+          <text x="42" y="132.1" text-anchor="end">80</text>
+          <text x="42" y="86.6" text-anchor="end">85</text>
+          <text x="42" y="41.2" text-anchor="end">90</text>
+          <text x="175" y="256" text-anchor="middle">probabilité annoncée (%)</text>
+          <text x="12" y="120" text-anchor="middle" transform="rotate(-90 12 120)">réussite réelle (%)</text>
+          <circle class="dot" cx="100" cy="199.1" r="5"/>
+          <circle class="dot" cx="133" cy="144.5" r="10"/>
+          <circle class="dot" cx="189.8" cy="111.8" r="7.5"/>
+          <circle class="dot" cx="252.3" cy="48.2" r="7"/>
+        </svg>
+        <p class="caption">Chaque point est une tranche de prévisions ; sa taille indique le nombre de matchs. Sur la diagonale, la réussite réelle égale exactement la probabilité annoncée.</p>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr><th>Tranche</th><th>Matchs</th><th>Annoncé</th><th>Réel</th></tr></thead>
+            <tbody>
+              <tr><td>70-75 %</td><td>386</td><td>74,4 %</td><td>72,3 %</td></tr>
+              <tr><td>75-80 %</td><td>1 615</td><td>77,3 %</td><td>78,3 %</td></tr>
+              <tr><td>80-85 %</td><td>962</td><td>82,3 %</td><td>81,9 %</td></tr>
+              <tr><td>85-91 %</td><td>805</td><td>87,8 %</td><td>88,9 %</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="parcours-t">
+    <div class="col-head"><span class="cell">E</span>Parcours</div>
+    <h2 id="parcours-t">Expérience en entreprise</h2>
+    <div class="timeline">
+      <div class="job">
+        <span class="when">avr.-juil. 2025</span>
+        <div><h3>Contrôle de gestion technique <small>· ENGIE Solutions, Nantes</small></h3>
+        <p>Suivi financier de projets énergie (réseaux de chaleur, solaire industriel), modélisation ROI et VAN, tableaux de bord Power BI, reporting mensuel, analyse de risques.</p></div>
+      </div>
+      <div class="job">
+        <span class="when">avr.-juil. 2024</span>
+        <div><h3>Audit et analyse financière <small>· Mazars (aujourd'hui Forvis Mazars), Bordeaux</small></h3>
+        <p>Rapprochements bancaires, retraitement de bilans, indicateurs clés pour les clients, audits internes.</p></div>
+      </div>
+      <div class="job">
+        <span class="when">avr.-août 2023</span>
+        <div><h3>Assistant chef de projet <small>· Kiro'o Games, Paris (télétravail)</small></h3>
+        <p>Stratégie budgétaire de deux jeux vidéo, préparation d'une levée de fonds et des supports investisseurs.</p></div>
+      </div>
     </div>
   </section>
 
