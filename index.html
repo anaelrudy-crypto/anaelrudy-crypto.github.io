@@ -136,6 +136,10 @@ th { color: var(--muted); font-weight: 500; }
 .scen { font-size: .85rem; min-width: 520px; }
 .scen th.hl, .scen td.hl { background: var(--accent-soft); color: var(--fg); font-weight: 500; }
 .scen .neg { color: var(--gold); }
+.shot { display: block; position: relative; border: 1px solid var(--line); background: #ffffff; line-height: 0; }
+.shot img { width: 100%; height: auto; display: block; }
+.shot::after { content: "Agrandir"; position: absolute; right: .5rem; bottom: .5rem; font: 500 .75rem/1 var(--mono); padding: .35rem .5rem; background: var(--fg); color: var(--bg); opacity: .85; }
+.shot:hover::after, .shot:focus-visible::after { opacity: 1; }
 .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; }
 .kpis div { display: grid; gap: .3rem; padding-bottom: .9rem; border-bottom: 1px solid var(--line); }
 .kpis span { font-size: .8rem; color: var(--muted); }
@@ -214,6 +218,7 @@ footer { color: var(--muted); font-size: .85rem; border-top: 1px solid var(--lin
     <p class="soon" style="font-size:.9rem">Chaque exemple est un vrai fichier Excel, entièrement en formules, à télécharger et à tester.</p>
     <p>Un modèle Excel sur 5 ans pour un atelier de torréfaction à Bordeaux (exemple fictif). On choisit un scénario dans une liste déroulante et tout se recalcule : compte de résultat, flux de trésorerie, VAN, TRI, délai de récupération, point mort. Une page explique les hypothèses et les simplifications.</p>
     <div class="example">
+      <a class="shot" href="images/business-plan.png" target="_blank" rel="noopener"><img src="images/business-plan.png" width="2232" height="1306" loading="lazy" alt="Onglet Prévisionnel du business plan : compte de résultat et flux de trésorerie sur 5 ans, scénario central."></a>
       <div style="overflow-x:auto">
         <table class="scen">
           <thead><tr><th>Scénario</th><th>Pessimiste</th><th class="hl">Central</th><th>Optimiste</th></tr></thead>
@@ -232,6 +237,7 @@ footer { color: var(--muted); font-size: .85rem; border-top: 1px solid var(--lin
     <h2 style="margin-top:1.5rem">Trésorerie sur 12 mois d'une entreprise de rénovation</h2>
     <p>Un tableau mois par mois pour une TPE de 3 personnes (exemple fictif). Il tient compte de ce qui fait vraiment varier le compte en banque : clients qui paient en trois fois, fournisseurs et charges sociales payés le mois suivant, TVA à 10 % sur les travaux mais 20 % sur les achats. Les mois sous le seuil d'alerte passent en rouge.</p>
     <figure class="example chart" style="margin:0">
+      <a class="shot" href="images/tresorerie.png" target="_blank" rel="noopener"><img src="images/tresorerie.png" width="3816" height="1498" loading="lazy" alt="Onglet Trésorerie : encaissements, décaissements et solde de janvier à décembre 2027, mars en rouge sous le seuil."></a>
       <h3>Trésorerie en fin de mois, 2027</h3>
       <svg viewBox="0 0 600 200" role="img" aria-label="Trésorerie en fin de mois : 14 420 € en janvier, point bas de 6 940 € en mars sous le seuil de 8 000 €, puis remontée jusqu'à 43 620 € en décembre.">
         <line class="axis" x1="50" y1="170" x2="580" y2="170"/>
@@ -258,6 +264,7 @@ footer { color: var(--muted); font-size: .85rem; border-top: 1px solid var(--lin
     <h2 style="margin-top:1.5rem">Reporting mensuel d'un réseau de 3 magasins</h2>
     <p>Un tableau de bord Excel pour une enseigne de vélos (exemple fictif). On choisit le mois et le magasin dans deux listes : indicateurs, écarts au budget et à l'an dernier, cumul de l'année, graphique et commentaire se mettent à jour seuls. Les écarts favorables sont en vert, les défavorables en rouge, en tenant compte du sens : une hausse des charges est défavorable.</p>
     <div class="example">
+      <a class="shot" href="images/reporting.png" target="_blank" rel="noopener"><img src="images/reporting.png" width="2502" height="1322" loading="lazy" alt="Tableau de bord du reporting : choix du mois et du magasin, indicateurs avec écarts colorés, commentaire automatique et tableau par magasin."></a>
       <div class="kpis">
         <div><span>Chiffre d'affaires, octobre</span><strong class="num">219 035 €</strong><em class="up">+4,4 % / budget · +12,1 % / 2025</em></div>
         <div><span>EBE, octobre</span><strong class="num">9 314 €</strong><em class="up">+3 274 € / budget</em></div>
