@@ -140,10 +140,10 @@ th { color: var(--muted); font-weight: 500; }
 .shot img { width: 100%; height: auto; display: block; }
 .shot::after { content: "Agrandir"; position: absolute; right: .5rem; bottom: .5rem; font: 500 .75rem/1 var(--mono); padding: .35rem .5rem; background: var(--fg); color: var(--bg); opacity: .85; }
 .shot:hover::after, .shot:focus-visible::after { opacity: 1; }
-.before { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+.before { display: grid; grid-template-columns: 1fr; gap: 1rem; }
 .before figure { margin: 0; display: grid; gap: .4rem; min-width: 0; }
 .before figcaption { font-size: .8rem; color: var(--muted); }
-.before pre { margin: 0; padding: .75rem; background: var(--bg); border: 1px solid var(--line); font: 400 .72rem/1.5 var(--mono); overflow-x: auto; color: var(--fg); }
+.before pre { margin: 0; padding: .75rem; background: var(--bg); border: 1px solid var(--line); font: 400 .8rem/1.5 var(--mono); overflow-x: auto; color: var(--fg); }
 .before mark { background: var(--gold); color: var(--bg); padding: 0 .15em; }
 .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; }
 .kpis div { display: grid; gap: .3rem; padding-bottom: .9rem; border-bottom: 1px solid var(--line); }
