@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Anael Rudy NGA · Finance et automatisation">
+<meta property="og:description" content="Modèles financiers, tableaux de bord Excel et Power BI, automatisation en Python.">
+<meta property="og:url" content="https://anaelrudy-crypto.github.io/">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 fill=%22%231d7a4e%22/><text x=%2216%22 y=%2222%22 font-size=%2216%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22monospace%22>fx</text></svg>">
+<title>Anael Rudy NGA</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Finance et automatisation : modèles financiers, tableaux de bord Excel et Power BI, analyse de données en Python.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Mise en page : une colonne de lecture, une barre de formule tableur en ouverture, des sections séparées par des en-têtes de colonne façon feuille de calcul. */
+:root {
+  --bg: #f5f7f4;
+  --surface: #ffffff;
+  --fg: #15211c;
+  --muted: #56645d;
+  --line: #d9e0db;
+  --accent: #1d7a4e;
+  --accent-soft: #e2f0e8;
+  --gold: #a8741a;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1613; --surface: #16201b; --fg: #e3ebe6; --muted: #9aaaa1;
+    --line: #2a3832; --accent: #4cc38a; --accent-soft: #183427; --gold: #e0b25a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1613; --surface: #16201b; --fg: #e3ebe6; --muted: #9aaaa1;
+  --line: #2a3832; --accent: #4cc38a; --accent-soft: #183427; --gold: #e0b25a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; }
+.dl { font: 500 .9rem/1.4 var(--mono); }
+.dl::before { content: "↓ "; }
+body {
+  background: var(--bg); color: var(--fg);
+  font: 400 1rem/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 4rem;
+}
+.wrap { max-width: 980px; margin: 0 auto; display: grid; gap: 4.5rem; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(2.3rem, 6vw, 3.6rem); font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.1rem); font-weight: 700; letter-spacing: -0.01em; }
+h3 { font-size: 1.2rem; font-weight: 500; }
+p { margin: 0; max-width: 65ch; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.mono { font-family: var(--mono); }
+.num { font-variant-numeric: tabular-nums; }
+
+/* En-tête de colonne façon tableur */
+.col-head { display: flex; align-items: center; gap: .75rem; font: 500 .75rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.25rem; }
+.col-head span.cell { border: 1px solid var(--line); background: var(--surface); padding: .35rem .55rem; color: var(--accent); }
+.col-head::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+section { display: grid; gap: 1.5rem; }
+
+/* Ouverture */
+header.hero { padding-top: 3.5rem; display: grid; gap: 1.75rem; }
+.fx { display: flex; align-items: stretch; border: 1px solid var(--line); background: var(--surface); font: 400 .9rem/1 var(--mono); max-width: 640px; overflow-x: auto; }
+.fx b { padding: .6rem .8rem; border-right: 1px solid var(--line); color: var(--muted); font-weight: 500; font-style: italic; white-space: nowrap; }
+.fx code { padding: .6rem .8rem; white-space: nowrap; color: var(--fg); font-family: inherit; }
+.fx code em { color: var(--accent); font-style: normal; }
+.fx code i { color: var(--gold); font-style: normal; }
+.lede { font-size: 1.2rem; color: var(--muted); }
+.lede strong { color: var(--fg); font-weight: 600; }
+.tags { display: flex; flex-wrap: wrap; gap: .5rem; }
+.tag { font: 500 .8rem/1 var(--mono); padding: .45rem .65rem; border: 1px solid var(--line); border-radius: 2px; color: var(--muted); background: var(--surface); }
+
+/* Services */
+.services { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+.service { background: var(--surface); border: 1px solid var(--line); padding: 1.5rem; display: grid; gap: .8rem; align-content: start; min-width: 0; }
+.service .ref { font: 500 .75rem/1 var(--mono); color: var(--accent); }
+.service ul { margin: 0; padding-left: 1.1rem; color: var(--muted); display: grid; gap: .3rem; }
+
+/* Projet phare */
+.project { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 2.5rem; align-items: start; }
+@media (max-width: 760px) { .project { grid-template-columns: 1fr; } }
+.project .text { display: grid; gap: 1.1rem; min-width: 0; }
+.figures { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); background: var(--surface); }
+.figures div { padding: 1rem; border-right: 1px solid var(--line); display: grid; gap: .25rem; }
+.figures div:last-child { border-right: 0; }
+.figures strong { font: 700 1.6rem/1 var(--display); font-variant-numeric: tabular-nums; }
+.figures span { font-size: .8rem; color: var(--muted); line-height: 1.35; }
+@media (max-width: 460px) { .figures { grid-template-columns: 1fr; } .figures div { border-right: 0; border-bottom: 1px solid var(--line); } .figures div:last-child { border-bottom: 0; } }
+.steps { margin: 0; padding-left: 1.2rem; display: grid; gap: .4rem; color: var(--muted); }
+.steps strong { color: var(--fg); font-weight: 600; }
+.note { border-left: 3px solid var(--gold); padding: .2rem 0 .2rem 1rem; color: var(--muted); font-size: .95rem; }
+.chart { background: var(--surface); border: 1px solid var(--line); padding: 1.25rem; display: grid; gap: .75rem; min-width: 0; }
+.chart h3 { font-size: 1rem; }
+.chart svg { width: 100%; height: auto; display: block; }
+.chart .axis { stroke: var(--line); }
+.chart .diag { stroke: var(--muted); stroke-dasharray: 4 4; }
+.chart .dot { fill: var(--accent); fill-opacity: .85; }
+.chart text { fill: var(--muted); font: 400 10px var(--mono); }
+.chart .caption { font-size: .8rem; color: var(--muted); }
+table { width: 100%; border-collapse: collapse; font: 400 .8rem/1.3 var(--mono); font-variant-numeric: tabular-nums; }
+th, td { text-align: right; padding: .35rem .4rem; border-bottom: 1px solid var(--line); }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--muted); font-weight: 500; }
+
+/* Parcours */
+.timeline { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.job { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 1.5rem; padding-block: 1.25rem; border-bottom: 1px solid var(--line); }
+@media (max-width: 560px) { .job { grid-template-columns: 1fr; gap: .4rem; } }
+.job .when { font: 400 .85rem/1.5 var(--mono); color: var(--muted); }
+.job h3 { margin-bottom: .35rem; }
+.job h3 small { font: 400 .95rem var(--body); color: var(--muted); }
+.job p { color: var(--muted); }
+
+/* Méthode */
+.method { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; counter-reset: s; }
+.method li { counter-increment: s; display: grid; gap: .4rem; padding-top: 1rem; border-top: 2px solid var(--accent); }
+.method li::before { content: "Étape " counter(s); font: 500 .75rem/1 var(--mono); color: var(--accent); letter-spacing: .06em; text-transform: uppercase; }
+.method p { color: var(--muted); font-size: .95rem; }
+
+.example { display: grid; gap: 1rem; background: var(--surface); border: 1px solid var(--line); padding: 1.25rem; }
+.scen { font-size: .85rem; min-width: 520px; }
+.scen th.hl, .scen td.hl { background: var(--accent-soft); color: var(--fg); font-weight: 500; }
+.scen .neg { color: var(--gold); }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; }
+.kpis div { display: grid; gap: .3rem; padding-bottom: .9rem; border-bottom: 1px solid var(--line); }
+.kpis span { font-size: .8rem; color: var(--muted); }
+.kpis strong { font: 700 1.5rem/1.1 var(--display); }
+.kpis em { font: 500 .8rem/1.3 var(--mono); font-style: normal; }
+.up { color: var(--accent); }
+.down { color: var(--gold); }
+.soon { color: var(--muted); }
+.cta { display: inline-block; background: var(--accent); color: var(--bg); text-decoration: none; font-weight: 600; padding: .8rem 1.3rem; border-radius: 2px; }
+.cta:hover { filter: brightness(1.08); }
+.soon ul { margin: .5rem 0 0; padding-left: 1.1rem; }
+footer { color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line); padding-top: 1.5rem; }
+@media (prefers-reduced-motion: no-preference) {
+  .fx code { animation: type 1.2s steps(40, end) both; }
+  @keyframes type { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="fx" aria-label="Barre de formule"><b>fx</b><code>=<em>DÉCISION</em>(<i>vos_données</i> ; modèle ; automatisation)</code></div>
+    <h1>Anael Rudy NGA</h1>
+    <p class="lede"><strong>Finance et automatisation.</strong> Je transforme vos fichiers Excel et vos données en outils de décision : modèles financiers, tableaux de bord, scripts Python qui font le travail répétitif à votre place.</p>
+    <div class="tags">
+      <span class="tag">Ingénieur généraliste · UCAC-ICAM</span>
+      <span class="tag">Bachelor Finance · INSEEC Bordeaux</span>
+      <span class="tag">Excel avancé · Power BI · Python · SQL</span>
+    </div>
+  </header>
+
+  <section aria-labelledby="services-t">
+    <div class="col-head"><span class="cell">A</span>Services</div>
+    <h2 id="services-t">Ce que je peux faire pour vous</h2>
+    <div class="services">
+      <article class="service">
+        <span class="ref">A1</span>
+        <h3>Modèles financiers et business plans</h3>
+        <p>Pour créer une entreprise, lever des fonds ou décider d'un investissement.</p>
+        <ul>
+          <li>Prévisionnel sur 3 à 5 ans</li>
+          <li>Calcul de VAN, TRI, délai de retour</li>
+          <li>Scénarios et sensibilités</li>
+        </ul>
+      </article>
+      <article class="service">
+        <span class="ref">A2</span>
+        <h3>Tableaux de bord et reporting</h3>
+        <p>Vos chiffres clés lisibles en un coup d'œil, mis à jour sans ressaisie.</p>
+        <ul>
+          <li>Tableaux de bord Excel ou Power BI</li>
+          <li>Suivi de trésorerie et de budget</li>
+          <li>Reporting mensuel automatisé</li>
+        </ul>
+      </article>
+      <article class="service">
+        <span class="ref">A3</span>
+        <h3>Automatisation et données</h3>
+        <p>Les tâches qui vous prennent des heures chaque semaine, faites en quelques secondes.</p>
+        <ul>
+          <li>Fusion et nettoyage de fichiers</li>
+          <li>Macros Excel (VBA) et scripts Python</li>
+          <li>Analyse de données et graphiques</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="projet-t">
+    <div class="col-head"><span class="cell">B</span>Projet phare</div>
+    <div class="project">
+      <div class="text">
+        <h2 id="projet-t">Un modèle de prévision mis à l'épreuve du réel</h2>
+        <p>Un système Python qui estime chaque jour les probabilités des matchs de 11 championnats européens et des coupes d'Europe, puis publie une page à jour automatiquement. Le football sert de terrain d'essai ; les méthodes sont celles de la finance quantitative : probabilités, calibration, backtest, comparaison au prix de marché.</p>
+        <div class="figures">
+          <div><strong class="num">12 500</strong><span>matchs historiques collectés et nettoyés</span></div>
+          <div><strong class="num">3 768</strong><span>matchs de test sur 12 mois, jamais vus à l'entraînement</span></div>
+          <div><strong class="num">80,9 %</strong><span>de réussite réelle pour 80,5 % annoncés</span></div>
+        </div>
+        <ol class="steps">
+          <li><strong>Collecte</strong> : résultats, tirs, buts attendus et cotes depuis trois sources, mise à jour quotidienne.</li>
+          <li><strong>Modélisation</strong> : classement Elo, régression logistique, loi de Poisson corrigée (Dixon-Coles).</li>
+          <li><strong>Évaluation</strong> : test sur 12 mois et comparaison au prix des bookmakers.</li>
+          <li><strong>Suivi</strong> : chaque prévision est enregistrée avant le match puis comparée au résultat.</li>
+        </ol>
+        <p class="note">Le constat est franc : le modèle égale le marché sans le battre. Je le dis parce qu'un modèle utile est d'abord un modèle dont on connaît les limites ; c'est la même rigueur que j'applique à un prévisionnel.</p>
+        <p><a href="https://github.com/anaelrudy-crypto/prevision-football" target="_blank" rel="noopener">Voir le code et la méthode sur GitHub →</a></p>
+        <p class="tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">scikit-learn</span><span class="tag">API web</span><span class="tag">Automatisation</span></p>
+      </div>
+      <figure class="chart" style="margin:0">
+        <h3>Ce qui est annoncé se réalise</h3>
+        <svg viewBox="0 0 320 262" role="img" aria-label="Taux de réussite réel en fonction de la probabilité annoncée, par tranche : les quatre points sont proches de la diagonale.">
+          <line class="axis" x1="50" y1="220" x2="300" y2="220"/>
+          <line class="axis" x1="50" y1="20" x2="50" y2="220"/>
+          <g>
+            <line class="axis" x1="50" y1="174.5" x2="300" y2="174.5" stroke-opacity=".5"/>
+            <line class="axis" x1="50" y1="129.1" x2="300" y2="129.1" stroke-opacity=".5"/>
+            <line class="axis" x1="50" y1="83.6" x2="300" y2="83.6" stroke-opacity=".5"/>
+            <line class="axis" x1="50" y1="38.2" x2="300" y2="38.2" stroke-opacity=".5"/>
+          </g>
+          <line class="diag" x1="50" y1="220" x2="300" y2="20"/>
+          <text x="50" y="236" text-anchor="middle">70</text>
+          <text x="106.8" y="236" text-anchor="middle">75</text>
+          <text x="163.6" y="236" text-anchor="middle">80</text>
+          <text x="220.5" y="236" text-anchor="middle">85</text>
+          <text x="277.3" y="236" text-anchor="middle">90</text>
+          <text x="42" y="223" text-anchor="end">70</text>
+          <text x="42" y="177.5" text-anchor="end">75</text>
+          <text x="42" y="132.1" text-anchor="end">80</text>
+          <text x="42" y="86.6" text-anchor="end">85</text>
+          <text x="42" y="41.2" text-anchor="end">90</text>
+          <text x="175" y="256" text-anchor="middle">probabilité annoncée (%)</text>
+          <text x="12" y="120" text-anchor="middle" transform="rotate(-90 12 120)">réussite réelle (%)</text>
+          <circle class="dot" cx="100" cy="199.1" r="5"/>
+          <circle class="dot" cx="133" cy="144.5" r="10"/>
+          <circle class="dot" cx="189.8" cy="111.8" r="7.5"/>
+          <circle class="dot" cx="252.3" cy="48.2" r="7"/>
+        </svg>
+        <p class="caption">Chaque point est une tranche de prévisions ; sa taille indique le nombre de matchs. Sur la diagonale, la réussite réelle égale exactement la probabilité annoncée.</p>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr><th>Tranche</th><th>Matchs</th><th>Annoncé</th><th>Réel</th></tr></thead>
+            <tbody>
+              <tr><td>70-75 %</td><td>386</td><td>74,4 %</td><td>72,3 %</td></tr>
+              <tr><td>75-80 %</td><td>1 615</td><td>77,3 %</td><td>78,3 %</td></tr>
+              <tr><td>80-85 %</td><td>962</td><td>82,3 %</td><td>81,9 %</td></tr>
+              <tr><td>85-91 %</td><td>805</td><td>87,8 %</td><td>88,9 %</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="parcours-t">
+    <div class="col-head"><span class="cell">C</span>Parcours</div>
+    <h2 id="parcours-t">Expérience en entreprise</h2>
+    <div class="timeline">
+      <div class="job">
+        <span class="when">avr.-juil. 2025</span>
+        <div><h3>Contrôle de gestion technique <small>· ENGIE Solutions, Nantes</small></h3>
+        <p>Suivi financier de projets énergie (réseaux de chaleur, solaire industriel), modélisation ROI et VAN, tableaux de bord Power BI, reporting mensuel, analyse de risques.</p></div>
+      </div>
+      <div class="job">
+        <span class="when">avr.-juil. 2024</span>
+        <div><h3>Audit et analyse financière <small>· Mazars (aujourd'hui Forvis Mazars), Bordeaux</small></h3>
+        <p>Rapprochements bancaires, retraitement de bilans, indicateurs clés pour les clients, audits internes.</p></div>
+      </div>
+      <div class="job">
+        <span class="when">avr.-août 2023</span>
+        <div><h3>Assistant chef de projet <small>· Kiro'o Games, Paris (télétravail)</small></h3>
+        <p>Stratégie budgétaire de deux jeux vidéo, préparation d'une levée de fonds et des supports investisseurs.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="methode-t">
+    <div class="col-head"><span class="cell">D</span>Méthode</div>
+    <h2 id="methode-t">Comment se passe une mission</h2>
+    <ol class="method">
+      <li><h3>Échange</h3><p>Vous décrivez votre besoin et me montrez vos fichiers actuels.</p></li>
+      <li><h3>Devis</h3><p>Un prix fixe et un délai clairs avant de commencer.</p></li>
+      <li><h3>Livraison</h3><p>Un fichier documenté que vous savez utiliser seul.</p></li>
+      <li><h3>Ajustements</h3><p>Une série de corrections incluse après livraison.</p></li>
+    </ol>
+    <p class="soon">Vos fichiers restent confidentiels et ne sont jamais réutilisés pour un autre client.</p>
+  </section>
+
+  <section aria-labelledby="exemples-t">
+    <div class="col-head"><span class="cell">E</span>Exemples</div>
+    <h2 id="exemples-t">Business plan d'une torréfaction de café</h2>
+    <p class="soon" style="font-size:.9rem">Chaque exemple est un vrai fichier Excel, entièrement en formules, à télécharger et à tester.</p>
+    <p>Un modèle Excel sur 5 ans pour un atelier de torréfaction à Bordeaux (exemple fictif). On choisit un scénario dans une liste déroulante et tout se recalcule : compte de résultat, flux de trésorerie, VAN, TRI, délai de récupération, point mort. Une page explique les hypothèses et les simplifications.</p>
+    <div class="example">
+      <div style="overflow-x:auto">
+        <table class="scen">
+          <thead><tr><th>Scénario</th><th>Pessimiste</th><th class="hl">Central</th><th>Optimiste</th></tr></thead>
+          <tbody>
+            <tr><td>Volume vendu en année 1</td><td>6 500 kg</td><td class="hl">8 000 kg</td><td>9 000 kg</td></tr>
+            <tr><td>Chiffre d'affaires en année 5</td><td>205 734 €</td><td class="hl">329 871 €</td><td>444 542 €</td></tr>
+            <tr><td>VAN à 9 %</td><td class="neg">−169 840 €</td><td class="hl">87 293 €</td><td>267 187 €</td></tr>
+            <tr><td>TRI</td><td>non significatif</td><td class="hl">32,1 %</td><td>70,4 %</td></tr>
+            <tr><td>Délai de récupération</td><td>au-delà de 5 ans</td><td class="hl">3,0 ans</td><td>1,8 an</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Ce qu'un client retient : avec 90 000 € investis, le point mort est à 6 500 kg la première année. Sous ce volume, le projet perd de l'argent chaque année. Un business plan sert aussi à montrer ce risque.</p>
+      <p><a class="dl" href="exemples/business-plan-torrefaction.xlsx" download>Télécharger le business plan (Excel, 4 onglets)</a></p>
+    </div>
+    <h2 style="margin-top:1.5rem">Trésorerie sur 12 mois d'une entreprise de rénovation</h2>
+    <p>Un tableau mois par mois pour une TPE de 3 personnes (exemple fictif). Il tient compte de ce qui fait vraiment varier le compte en banque : clients qui paient en trois fois, fournisseurs et charges sociales payés le mois suivant, TVA à 10 % sur les travaux mais 20 % sur les achats. Les mois sous le seuil d'alerte passent en rouge.</p>
+    <figure class="example chart" style="margin:0">
+      <h3>Trésorerie en fin de mois, 2027</h3>
+      <svg viewBox="0 0 600 200" role="img" aria-label="Trésorerie en fin de mois : 14 420 € en janvier, point bas de 6 940 € en mars sous le seuil de 8 000 €, puis remontée jusqu'à 43 620 € en décembre.">
+        <line class="axis" x1="50" y1="170" x2="580" y2="170"/>
+        <line class="axis" x1="50" y1="120" x2="580" y2="120" stroke-opacity=".5"/>
+        <line class="axis" x1="50" y1="70" x2="580" y2="70" stroke-opacity=".5"/>
+        <line class="axis" x1="50" y1="20" x2="580" y2="20" stroke-opacity=".5"/>
+        <text x="42" y="173" text-anchor="end">0</text>
+        <text x="42" y="123" text-anchor="end">15 k€</text>
+        <text x="42" y="73" text-anchor="end">30 k€</text>
+        <text x="42" y="23" text-anchor="end">45 k€</text>
+        <line x1="50" y1="143.3" x2="580" y2="143.3" stroke="var(--gold)" stroke-dasharray="5 4"/>
+        <text x="580" y="138" text-anchor="end" style="fill:var(--gold)">seuil d'alerte 8 000 €</text>
+        <polyline fill="none" stroke="var(--accent)" stroke-width="2.5" points="50,121.9 98.2,125.7 146.4,146.9 194.5,133.6 242.7,115 290.9,90.6 339.1,70.7 387.3,68.9 435.5,57 483.6,48.7 531.8,33.1 580,24.6"/>
+        <circle cx="146.4" cy="146.9" r="5" style="fill:var(--gold)"/>
+        <text x="146.4" y="162" text-anchor="middle" style="fill:var(--gold)">6 940 €</text>
+        <circle cx="580" cy="24.6" r="4" class="dot"/>
+        <g text-anchor="middle">
+          <text x="50" y="188">janv.</text><text x="98.2" y="188">févr.</text><text x="146.4" y="188">mars</text><text x="194.5" y="188">avr.</text><text x="242.7" y="188">mai</text><text x="290.9" y="188">juin</text><text x="339.1" y="188">juil.</text><text x="387.3" y="188">août</text><text x="435.5" y="188">sept.</text><text x="483.6" y="188">oct.</text><text x="531.8" y="188">nov.</text><text x="565" y="188">déc.</text>
+        </g>
+      </svg>
+      <p class="note">L'entreprise est rentable sur l'année (+28 620 €), mais en mars, l'achat d'outillage tombe en même temps que les encaissements faibles de l'hiver : la trésorerie descend à 6 940 €. Le savoir en janvier laisse le temps d'agir : décaler l'achat à avril ou demander un acompte plus élevé.</p>
+      <p><a class="dl" href="exemples/tresorerie-12-mois-renovation.xlsx" download>Télécharger le prévisionnel de trésorerie (Excel)</a></p>
+    </figure>
+    <h2 style="margin-top:1.5rem">Reporting mensuel d'un réseau de 3 magasins</h2>
+    <p>Un tableau de bord Excel pour une enseigne de vélos (exemple fictif). On choisit le mois et le magasin dans deux listes : indicateurs, écarts au budget et à l'an dernier, cumul de l'année, graphique et commentaire se mettent à jour seuls. Les écarts favorables sont en vert, les défavorables en rouge, en tenant compte du sens : une hausse des charges est défavorable.</p>
+    <div class="example">
+      <div class="kpis">
+        <div><span>Chiffre d'affaires, octobre</span><strong class="num">219 035 €</strong><em class="up">+4,4 % / budget · +12,1 % / 2025</em></div>
+        <div><span>EBE, octobre</span><strong class="num">9 314 €</strong><em class="up">+3 274 € / budget</em></div>
+        <div><span>EBE cumulé à fin octobre</span><strong class="num">139 923 €</strong><em class="down">−11 741 € / budget</em></div>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="scen">
+          <thead><tr><th>Octobre</th><th>CA réel</th><th>Écart / budget</th><th>EBE réel</th><th>Écart EBE</th></tr></thead>
+          <tbody>
+            <tr><td>Bordeaux</td><td>100 090 €</td><td class="up">+10,4 %</td><td>7 401 €</td><td class="up">+4 236 €</td></tr>
+            <tr><td>Mérignac</td><td>67 356 €</td><td class="up">+0,9 %</td><td>2 984 €</td><td class="up">+596 €</td></tr>
+            <tr><td>Pessac</td><td>51 589 €</td><td class="down">−1,7 %</td><td class="down">−1 071 €</td><td class="down">−1 558 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Le mois est bon, mais l'année est en retard sur le budget. En cliquant sur Pessac, on voit pourquoi : des travaux devant le magasin ont fait chuter les ventes de juin à septembre. Bordeaux compense en partie grâce au lancement des vélos cargo. Un reporting utile pointe la cause, pas seulement le chiffre.</p>
+      <p><a class="dl" href="exemples/reporting-mensuel-velos.xlsx" download>Télécharger le reporting mensuel (Excel)</a></p>
+    </div>
+  </section>
+
+  <section aria-labelledby="contact-t">
+    <div class="col-head"><span class="cell">F</span>Contact</div>
+    <h2 id="contact-t">Parlons de votre projet</h2>
+    <p>Décrivez-moi votre besoin en quelques lignes : je vous réponds avec une première idée de solution, un délai et un prix.</p>
+    <p><a class="cta" href="https://www.linkedin.com/in/rudy-anael-27b385446/" target="_blank" rel="noopener">Me contacter sur LinkedIn</a></p>
+    <p class="soon mono" style="font-size:.85rem">linkedin.com/in/rudy-anael-27b385446</p>
+  </section>
+
+  <footer>Anael Rudy NGA · Bordeaux, Nantes, Paris ou à distance</footer>
+</div>
+</body>
+</html>
