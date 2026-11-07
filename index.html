@@ -140,6 +140,11 @@ th { color: var(--muted); font-weight: 500; }
 .shot img { width: 100%; height: auto; display: block; }
 .shot::after { content: "Agrandir"; position: absolute; right: .5rem; bottom: .5rem; font: 500 .75rem/1 var(--mono); padding: .35rem .5rem; background: var(--fg); color: var(--bg); opacity: .85; }
 .shot:hover::after, .shot:focus-visible::after { opacity: 1; }
+.before { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+.before figure { margin: 0; display: grid; gap: .4rem; min-width: 0; }
+.before figcaption { font-size: .8rem; color: var(--muted); }
+.before pre { margin: 0; padding: .75rem; background: var(--bg); border: 1px solid var(--line); font: 400 .72rem/1.5 var(--mono); overflow-x: auto; color: var(--fg); }
+.before mark { background: var(--gold); color: var(--bg); padding: 0 .15em; }
 .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; }
 .kpis div { display: grid; gap: .3rem; padding-bottom: .9rem; border-bottom: 1px solid var(--line); }
 .kpis span { font-size: .8rem; color: var(--muted); }
@@ -282,6 +287,39 @@ footer { color: var(--muted); font-size: .85rem; border-top: 1px solid var(--lin
       </div>
       <p class="note">Le mois est bon, mais l'année est en retard sur le budget. En cliquant sur Pessac, on voit pourquoi : des travaux devant le magasin ont fait chuter les ventes de juin à septembre. Bordeaux compense en partie grâce au lancement des vélos cargo. Un reporting utile pointe la cause, pas seulement le chiffre.</p>
       <p><a class="dl" href="exemples/reporting-mensuel-velos.xlsx" download>Télécharger le reporting mensuel (Excel)</a></p>
+    </div>
+
+    <h2 style="margin-top:1.5rem">Automatisation : 30 exports de caisse regroupés en 4 secondes</h2>
+    <p>Un commerce de 3 boutiques (exemple fictif) reçoit chaque mois l'export de vente de chaque caisse. Les logiciels sont différents, donc les fichiers aussi. Un script les lit tous, les nettoie et produit un seul fichier Excel prêt à analyser.</p>
+    <div class="example">
+      <h3>Avant : trois formats pour la même information</h3>
+      <div class="before">
+        <figure><figcaption>Bordeaux · CSV « ; », montants en texte</figcaption>
+<pre>Date;N° ticket;Catégorie;Qté;Montant TTC;Paiement
+01/03/2026;BOR03-0009;Épices;2;16,62 €;Sans contact
+01/03/2026;BOR03-0034;Accessoires;3;40,22 €;CB</pre></figure>
+        <figure><figcaption>Arcachon · CSV « , », autres colonnes, montants manquants</figcaption>
+<pre>date_vente,famille,num_ticket,total_ttc,qty,reglement
+2026-03-01,ÉPICES,ARC03-0020,10.87,1,Sans contact
+2026-03-05,ÉPICES,ARC03-0200,<mark>  </mark>,1,CB</pre></figure>
+        <figure><figcaption>Libourne · Excel avec titre, ligne TOTAL et doublons</figcaption>
+<pre>COMPTOIR DES ÉPICES - LIBOURNE
+Journal des ventes - mars 2026
+
+Date        Ticket      Catégorie  Quantité  Montant
+01/03/2026  LIB03-0017  Coffrets   2         69,67
+…
+<mark>TOTAL</mark>                              =SOMME(…)</pre></figure>
+      </div>
+      <h3>Après : un seul fichier, contrôlé</h3>
+      <a class="shot" href="images/automatisation-synthese.png" target="_blank" rel="noopener"><img src="images/automatisation-synthese.png" width="1296" height="909" loading="lazy" alt="Onglet Synthèse du fichier consolidé : chiffre d'affaires par mois et par boutique, puis par catégorie, total 204 037,55 €."></a>
+      <div class="kpis">
+        <div><span>Fichiers lus</span><strong class="num">30</strong><em>3 formats différents</em></div>
+        <div><span>Ventes consolidées</span><strong class="num">7 316</strong><em>en 4 secondes</em></div>
+        <div><span>Lignes écartées et listées</span><strong class="num">44</strong><em>10 totaux · 30 doublons · 4 montants manquants</em></div>
+      </div>
+      <p class="note">Le point qui compte : rien ne disparaît en silence. Un onglet Contrôles indique, fichier par fichier, ce qui a été lu, retiré ou mis de côté, et liste les lignes à vérifier (montants manquants, 43 remboursements). Le total final a été recalculé séparément : 204 037,55 €, au centime près.</p>
+      <p><a class="dl" href="exemples/automatisation-exemple.zip" download>Télécharger l'exemple complet (fichiers d'entrée, script Python, résultat Excel)</a></p>
     </div>
   </section>
 
